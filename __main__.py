@@ -76,7 +76,12 @@ def maxfilt(x, k):
 # by https://stackoverflow.com/questions/41190852/most-efficient-way-to-forward-fill-nan-values-in-numpy-array
 def pandas_fill(arr, method="ffill"):
     df = pd.Series(arr)
-    df.fillna(method=method, inplace=True)
+    # df.fillna(method=method, inplace=True)
+    if method == "ffill":
+        df.ffill(inplace=True)
+    if method == "bfill":
+        df.bfill(inplace=True)
+    
     return df.values
 
 def pandas_interpolate(arr):
@@ -177,7 +182,8 @@ def analysis_resynthesis(signal, sampling_rate, min_freq, max_freq, frame_period
 if __name__ == "__main__":
     syssig.signal(syssig.SIGINT, handler)
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input", help="Input WAV file path. Audio file must be mono. It is required.", required=True)
+    parser.add_argument(
+        "-i", "--input", help="Input WAV file path. Audio file must be mono. It is required.", required=True)
     parser.add_argument("-o", "--output", help="Output WAV file path. It is required.", required=True)
     parser.add_argument(
         "-p", "--f0", help="F0 Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this value increases the pitch. default is %(default)s", type=float, default=1.0)
