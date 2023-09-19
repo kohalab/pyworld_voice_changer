@@ -81,7 +81,7 @@ def pandas_fill(arr, method="ffill"):
         df.ffill(inplace=True)
     if method == "bfill":
         df.bfill(inplace=True)
-    
+
     return df.values
 
 def pandas_interpolate(arr):
@@ -144,7 +144,7 @@ def analysis_resynthesis(signal, sampling_rate, min_freq, max_freq, frame_period
         # print(sp[0:63, 64])
         for i in range(modified_sp.shape[0]):
             f = interpolate.interp1d(x=np.arange(
-                modified_sp.shape[1]), y=sp[i, :], kind='linear', axis=0, bounds_error=False)
+                modified_sp.shape[1]), y=sp[i, :], kind='linear', axis=0, copy=False, bounds_error=False)
             modified_sp[i, :] = f(change_x)
             modified_sp[i, :] = pandas_fill(modified_sp[i, :], "ffill")  # NaNを前の要素で補間
         # print("type(modified_sp.shape):" + str(type(modified_sp)))
@@ -162,7 +162,7 @@ def analysis_resynthesis(signal, sampling_rate, min_freq, max_freq, frame_period
         # print(sp[0:63, 64])
         for i in range(modified_sp.shape[0]):
             f = interpolate.interp1d(x=np.arange(
-                modified_sp.shape[1]), y=sp[i, :], kind='linear', axis=0, copy=Flase, bounds_error=False)
+                modified_sp.shape[1]), y=sp[i, :], kind='linear', axis=0, copy=False, bounds_error=False)
             modified_sp[i, :] = f(change_x)
         # print("type(modified_sp.shape):" + str(type(modified_sp)))
         # print("modified_sp.shape:" + str(modified_sp.shape))
