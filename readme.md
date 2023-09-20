@@ -99,7 +99,7 @@ without option
 <audio src="media/ex_gameover_p2f0.75.mp3" controls></audio>
 
 ### Female ladies and gentlemen
-Greetings, ladies and gentlemen!
+Greetings, ladies and gentlemen!  
 https://freesound.org/people/MadamVicious/sounds/368378/  
 CC0 License.
 
