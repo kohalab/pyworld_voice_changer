@@ -104,40 +104,40 @@ https://freesound.org/people/MadamVicious/sounds/368378/
 CC0 License.
 
 Original  
-<audio src="media/ex_ladies_and_gentlemen_orig.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_orig.mp3" controls></audio>
 
 without option  
-<audio src="media/ex_ladies_and_gentlemen.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen.mp3" controls></audio>
 
 `-p 0.5`  
-<audio src="media/ex_ladies_and_gentlemen_p0.5.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_p0.5.mp3" controls></audio>
 
 `-p 0.75`  
-<audio src="media/ex_ladies_and_gentlemen_p0.75.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_p0.75.mp3" controls></audio>
 
 `-p 2`  
-<audio src="media/ex_ladies_and_gentlemen_p2.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_p2.mp3" controls></audio>
 
 `-f 0.5`  
-<audio src="media/ex_ladies_and_gentlemen_f0.5.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_f0.5.mp3" controls></audio>
 
 `-f 0.75`  
-<audio src="media/ex_ladies_and_gentlemen_f0.75.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_f0.75.mp3" controls></audio>
 
 `-f 1.5`  
-<audio src="media/ex_ladies_and_gentlemen_f1.5.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_f1.5.mp3" controls></audio>
 
 `-f 2`  
-<audio src="media/ex_ladies_and_gentlemen_f2.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_f2.mp3" controls></audio>
 
 `-s 0.5`  
-<audio src="media/ex_ladies_and_gentlemen_s0.5.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_s0.5.mp3" controls></audio>
 
 `-s 2`  
-<audio src="media/ex_ladies_and_gentlemen_s2.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_s2.mp3" controls></audio>
 
 `-p 0.5 -f 1.2`  
-<audio src="media/ex_ladies_and_gentlemen_p0.5f1.2.wav" controls></audio>
+<audio src="media/ex_ladies_and_gentlemen_p0.5f1.2.mp3" controls></audio>
 
 ## Usage | help
 ```
