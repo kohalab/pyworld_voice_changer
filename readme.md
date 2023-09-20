@@ -1,6 +1,6 @@
 # pyworld_voice_changer
 
-Pythonで書かれたWAV音声ファイルに対してボイスチェンジャー処理をしてWAVファイルに保存するソフトです。
+Pythonで書かれ.ogg音声ファイルに対してボイスチェンジャー処理をし.oggファイルに保存するソフトです。
 
 本プログラムのベースにこちらのブログのプログラムコードを利用しました。感謝申し上げます。  
 https://tam5917.hatenablog.com/entry/2019/04/28/123934
@@ -47,8 +47,98 @@ pip install -r requirements.txt
 
 ピッチが1.5倍、フォルマントが1/0.85倍
 ```
-python . -i "in.wav" -o "out.wav" -p 1.5 -f 0.85
+python . -i "in.ogg" -o "out.ogg" -p 1.5 -f 0.85
 ```
+
+## Example
+<!-- 
+convert wav to ogg(aoTuV):
+find . -name '*.wav' -print0 | xargs -0 -I {} oggenc2 -q 9 {} -o {}.ogg
+-->
+### Male Game Over
+VG Voice - Announcer.ogg  
+https://freesound.org/people/TheAtomicBrain/sounds/319141/  
+CC0 License.
+
+Original  
+<audio src="media/ex_gameover_orig.ogg" controls></audio>
+
+without option  
+<audio src="media/ex_gameover.ogg" controls></audio>
+
+`-p 0.5`  
+<audio src="media/ex_gameover_p0.5.ogg" controls></audio>
+
+`-p 0.75`  
+<audio src="media/ex_gameover_p0.75.ogg" controls></audio>
+
+`-p 2`  
+<audio src="media/ex_gameover_p2.ogg" controls></audio>
+
+`-p 3`  
+<audio src="media/ex_gameover_p3.ogg" controls></audio>
+
+`-f 0.5`  
+<audio src="media/ex_gameover_f0.5.ogg" controls></audio>
+
+`-f 0.75`  
+<audio src="media/ex_gameover_f0.75.ogg" controls></audio>
+
+`-f 1.5`  
+<audio src="media/ex_gameover_f1.5.ogg" controls></audio>
+
+`-f 2`  
+<audio src="media/ex_gameover_f2.ogg" controls></audio>
+
+`-s 0.5`  
+<audio src="media/ex_gameover_s0.5.ogg" controls></audio>
+
+`-s 2`  
+<audio src="media/ex_gameover_s2.ogg" controls></audio>
+
+`-p 2 -f 0.75`  
+<audio src="media/ex_gameover_p2f0.75.ogg" controls></audio>
+
+### Female ladies and gentlemen
+Greetings, ladies and gentlemen!
+https://freesound.org/people/MadamVicious/sounds/368378/  
+CC0 License.
+
+Original  
+<audio src="media/ex_ladies_and_gentlemen_orig.ogg" controls></audio>
+
+without option  
+<audio src="media/ex_ladies_and_gentlemen.ogg" controls></audio>
+
+`-p 0.5`  
+<audio src="media/ex_ladies_and_gentlemen_p0.5.ogg" controls></audio>
+
+`-p 0.75`  
+<audio src="media/ex_ladies_and_gentlemen_p0.75.ogg" controls></audio>
+
+`-p 2`  
+<audio src="media/ex_ladies_and_gentlemen_p2.ogg" controls></audio>
+
+`-f 0.5`  
+<audio src="media/ex_ladies_and_gentlemen_f0.5.ogg" controls></audio>
+
+`-f 0.75`  
+<audio src="media/ex_ladies_and_gentlemen_f0.75.ogg" controls></audio>
+
+`-f 1.5`  
+<audio src="media/ex_ladies_and_gentlemen_f1.5.ogg" controls></audio>
+
+`-f 2`  
+<audio src="media/ex_ladies_and_gentlemen_f2.ogg" controls></audio>
+
+`-s 0.5`  
+<audio src="media/ex_ladies_and_gentlemen_s0.5.ogg" controls></audio>
+
+`-s 2`  
+<audio src="media/ex_ladies_and_gentlemen_s2.ogg" controls></audio>
+
+`-p 0.5 -f 1.2`  
+<audio src="media/ex_ladies_and_gentlemen_p0.5f1.2.ogg" controls></audio>
 
 ## Usage | help
 ```
@@ -58,9 +148,9 @@ usage: . [-h] -i INPUT -o OUTPUT [-p F0] [-f FORMANT] [-s SPEED] [-v MAIN_VOLUME
 options:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        Input WAV file path. Audio file must be mono. It is required.
+                        Input.ogg file path. Audio file must be mono. It is required.
   -o OUTPUT, --output OUTPUT
-                        Output WAV file path. It is required.
+                        Output.ogg file path. It is required.
   -p F0, --f0 F0        F0 Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this value
                         increases the pitch. default is 1.0
   -f FORMANT, --formant FORMANT
@@ -70,7 +160,7 @@ options:
                         Speed multiplier to change. No change in 1.0. Value must be greater than 0. Increasing the value
                         will make it slower, decreasing it will make it faster. default is 1.0
   -v MAIN_VOLUME, --main_volume MAIN_VOLUME
-                        Input volume multiplier. No change in 1.0. 0.5 to half, 2 to double. default is 0.5
+                        Input volume multiplier. No change in 1.0. 0.5 to half, 2 to double. default is 1.0
   -l MIN_F0, --min_f0 MIN_F0
                         F0 lowest frequency. Value unit is Hz. For example, a male voice is 80Hz, a female voice is 250Hz.
                         default is 80.0
@@ -102,16 +192,16 @@ usage: . [-h] -i INPUT -o OUTPUT [-p F0] [-f FORMANT] [-s SPEED] [-v MAIN_VOLUME
 options:
   -h, --help            このヘルプ メッセージを表示して終了します
   -i INPUT, --input INPUT
-                        入力のWAVファイルのパス。 音声ファイルはモノラルでなければなりません。 必須。
+                        入力.oggファイルのパス。 音声ファイルはモノラルでなければなりません。 必須。
   -o OUTPUT, --output OUTPUT
-                        出力のWAVファイルのパス。 音声ファイルはモノラルでなければなりません。 必須。
+                        出力.oggファイルのパス。 音声ファイルはモノラルでなければなりません。 必須。
   -p F0, --f0 F0        F0 周波数乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。この値を増やすとピッチが高くなります。 デフォルトは1.0です
   -f FORMANT, --formant FORMANT
                         フォルマント周波数乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。この値を大きくすると、フォルマントのピッチが低くなります。 デフォルトは1.0です
   -s SPEED, --speed SPEED
                         速度変更乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。値を増やすと遅くなり、減らすと速くなります。 デフォルトは1.0です
   -v MAIN_VOLUME, --main_volume MAIN_VOLUME
-                        入力ボリューム乗数。 1.0で変化なし。 0.5で半分、2で2倍。 デフォルトは0.5です
+                        入力ボリューム乗数。 1.0で変化なし。 0.5で半分、2で2倍。 デフォルトは1.0です
   -l MIN_F0, --min_f0 MIN_F0
                         F0 最低周波数。 値の単位は Hz です。 たとえば、男性の声は 80 Hz、女性の声は 250 Hz です。 デフォルトは80.0です
   -H MAX_F0, --max_f0 MAX_F0

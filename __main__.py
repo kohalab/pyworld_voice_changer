@@ -7,7 +7,6 @@ import sys
 def handler(signal, frame):
     raise SystemExit('Exiting')
 
-
 import argparse
 
 import numpy as np
@@ -16,27 +15,6 @@ import wave
 import pyworld as pw
 from scipy import signal
 from scipy import interpolate
-
-"""
-master_volume = 0.5  # 入力のボリュームの倍率 1 = 通常
-
-min_freq = 250  # f0の最低周波数 男性なら80Hz以上とか 女性なら150Hz以上とか
-max_freq = 1200  # f1の最高周波数 男性なら800Hz以下とか 女性なら1500Hz以下とか
-
-frame_period = 5  # milliseconds default: 5 少ないほど処理が遅い？(1なら5にした場合より20倍くらい遅い)
-
-# Harvest F0抽出法を使用する
-# Falseの場合DIOを使用する
-# DIOに高い雑音耐性を持たせたものらしい
-# 確かに精度がいい気がする
-# でも遅くなる気がする
-use_harvest = True
-
-world_fft_size = 16384  # Noneで自動か、普通だと1024とか 2の幕 上げると遅くなるけど音質が良くなる 16384辺りが速度と品質のバランスが良い
-
-f0_rate = 0.5  # 声の高さの調整 : 2倍にすれば1オクターブ上に、0.5倍にすれば1オクターブ下に
-sp_rate = 1.2  # 声色の調整 (> 0.0) : 女性の声にする場合は1.0より小さく、男性の声にする場合はその逆で大きく
-"""
 
 # by https://gist.github.com/jgraving/e9e0e490ed83f84501d38061f1f985f2
 def medfilt(x, k):
@@ -140,34 +118,21 @@ def analysis_resynthesis(signal, sampling_rate, min_freq, max_freq, frame_period
     if sp_rate > 1:
         # 縮小 足りない高周波は元から戻す
         change_x = np.arange(modified_sp.shape[1]) * sp_rate
-        # print(change_x[:])
-        # print(sp[0:63, 64])
         for i in range(modified_sp.shape[0]):
             f = interpolate.interp1d(x=np.arange(
                 modified_sp.shape[1]), y=sp[i, :], kind='linear', axis=0, copy=False, bounds_error=False)
             modified_sp[i, :] = f(change_x)
             modified_sp[i, :] = pandas_fill(modified_sp[i, :], "ffill")  # NaNを前の要素で補間
-        # print("type(modified_sp.shape):" + str(type(modified_sp)))
-        # print("modified_sp.shape:" + str(modified_sp.shape))
         last_index = int(modified_sp.shape[1] / sp_rate)
-        # modified_sp[:, last_index:] = sp[:, last_index:]  # 足りない部分を元から戻す
-        # print(modified_sp[64, :])
-        # print(modified_sp[0:63, 64])
         # NaNの値を0にする
         modified_sp = np.nan_to_num(modified_sp)
     else:
         # 拡大 高周波は切り捨て
         change_x = np.arange(modified_sp.shape[1]) * sp_rate
-        # print(change_x[:])
-        # print(sp[0:63, 64])
         for i in range(modified_sp.shape[0]):
             f = interpolate.interp1d(x=np.arange(
                 modified_sp.shape[1]), y=sp[i, :], kind='linear', axis=0, copy=False, bounds_error=False)
             modified_sp[i, :] = f(change_x)
-        # print("type(modified_sp.shape):" + str(type(modified_sp)))
-        # print("modified_sp.shape:" + str(modified_sp.shape))
-        # print(modified_sp[64, :])
-        # print(modified_sp[0:63, 64])
         # NaNの値を0にする
         modified_sp = np.nan_to_num(modified_sp)
         pass
@@ -191,7 +156,7 @@ if __name__ == "__main__":
         "-f", "--formant", help="Formant Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this value decreases the pitch of the formant. default is %(default)s", type=float, default=1.0)
     parser.add_argument("-s", "--speed", help="Speed multiplier to change. No change in 1.0. Value must be greater than 0. Increasing the value will make it slower, decreasing it will make it faster. default is %(default)s", default=1.0, type=float)
     parser.add_argument("-v", "--main_volume",
-                        help="Input volume multiplier. No change in 1.0. 0.5 to half, 2 to double. default is %(default)s", type=float, default=0.5)
+                        help="Input volume multiplier. No change in 1.0. 0.5 to half, 2 to double. default is %(default)s", type=float, default=1.0)
     parser.add_argument(
         "-l", "--min_f0", help="F0 lowest frequency. Value unit is Hz. For example, a male voice is 80Hz, a female voice is 250Hz. default is %(default)s", type=float, default=80.0)
     parser.add_argument(
