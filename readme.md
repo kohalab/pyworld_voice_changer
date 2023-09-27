@@ -79,16 +79,16 @@ without option
 `-p 3`  
 <audio src="media/ex_gameover_p3.mp3" controls></audio>
 
-`-f 0.5`  
+`-f 2`  
 <audio src="media/ex_gameover_f0.5.mp3" controls></audio>
 
-`-f 0.75`  
+`-f 1.333`  
 <audio src="media/ex_gameover_f0.75.mp3" controls></audio>
 
-`-f 1.5`  
+`-f 0.666`  
 <audio src="media/ex_gameover_f1.5.mp3" controls></audio>
 
-`-f 2`  
+`-f 0.5`  
 <audio src="media/ex_gameover_f2.mp3" controls></audio>
 
 `-s 0.5`  
@@ -97,7 +97,7 @@ without option
 `-s 2`  
 <audio src="media/ex_gameover_s2.mp3" controls></audio>
 
-`-p 2 -f 0.75`  
+`-p 2 -f 1.333`  
 <audio src="media/ex_gameover_p2f0.75.mp3" controls></audio>
 
 ### Female ladies and gentlemen
@@ -120,16 +120,16 @@ without option
 `-p 2`  
 <audio src="media/ex_ladies_and_gentlemen_p2.mp3" controls></audio>
 
-`-f 0.5`  
+`-f 2`  
 <audio src="media/ex_ladies_and_gentlemen_f0.5.mp3" controls></audio>
 
-`-f 0.75`  
+`-f 1.333`  
 <audio src="media/ex_ladies_and_gentlemen_f0.75.mp3" controls></audio>
 
-`-f 1.5`  
+`-f 0.666`  
 <audio src="media/ex_ladies_and_gentlemen_f1.5.mp3" controls></audio>
 
-`-f 2`  
+`-f 0.5`  
 <audio src="media/ex_ladies_and_gentlemen_f2.mp3" controls></audio>
 
 `-s 0.5`  
@@ -138,12 +138,12 @@ without option
 `-s 2`  
 <audio src="media/ex_ladies_and_gentlemen_s2.mp3" controls></audio>
 
-`-p 0.5 -f 1.2`  
+`-p 0.5 -f 0.833`  
 <audio src="media/ex_ladies_and_gentlemen_p0.5f1.2.mp3" controls></audio>
 
 ## Usage | help
 ```
-usage: . [-h] -i INPUT -o OUTPUT [-p F0] [-f FORMANT] [-s SPEED] [-v MAIN_VOLUME] [-l MIN_F0] [-H MAX_F0]
+usage: . [-h] -i INPUT -o OUTPUT [-p F0] [-f FORMANT] [-c FORMANT_POW] [-F FIX_F0] [-s SPEED] [-v MAIN_VOLUME] [-l MIN_F0] [-H MAX_F0]
          [-a APERIODICITY] [-t D4C_THRESHOLD] [-w FFT_SIZE] [-P FRAME_PERIOD] [-d]
 
 options:
@@ -152,42 +152,44 @@ options:
                         Input WAV file path. Audio file must be mono. It is required.
   -o OUTPUT, --output OUTPUT
                         Output WAV file path. It is required.
-  -p F0, --f0 F0        F0 Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this value
-                        increases the pitch. default is 1.0
+  -p F0, --f0 F0        F0 Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this value increases the pitch. default
+                        is 1.0
   -f FORMANT, --formant FORMANT
-                        Formant Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this
-                        value decreases the pitch of the formant. default is 1.0
+                        Formant Frequency multiplier. No change in 1.0. Value must be greater than 0. Increasing this value increasing the pitch of
+                        the formant. default is 1.0
+  -c FORMANT_POW, --formant_pow FORMANT_POW
+                        inverse of Formant frequency power curve. No change in 1.0. Value must be greater than 0. Increasing this value increasing
+                        the pitch of the formant. default is 1.0
+  -F FIX_F0, --fix_f0 FIX_F0
+                        Fixed F0 frequency. Enabled if other than 0. default is 0.0
   -s SPEED, --speed SPEED
-                        Speed multiplier to change. No change in 1.0. Value must be greater than 0. Increasing the value
-                        will make it slower, decreasing it will make it faster. default is 1.0
+                        Speed multiplier to change. No change in 1.0. Value must be greater than 0. Increasing the value will make it slower,
+                        decreasing it will make it faster. default is 1.0
   -v MAIN_VOLUME, --main_volume MAIN_VOLUME
                         Input volume multiplier. No change in 1.0. 0.5 to half, 2 to double. default is 1.0
   -l MIN_F0, --min_f0 MIN_F0
-                        F0 lowest frequency. Value unit is Hz. For example, a male voice is 80Hz, a female voice is 250Hz.
-                        default is 80.0
+                        F0 lowest frequency. Value unit is Hz. For example, a male voice is 80Hz, a female voice is 250Hz. default is 80.0
   -H MAX_F0, --max_f0 MAX_F0
-                        F0 highest frequency. Value unit is Hz. For example, a male voice is 800Hz, a female voice is
-                        1500Hz. default is 1500.0
+                        F0 highest frequency. Value unit is Hz. For example, a male voice is 800Hz, a female voice is 1500Hz. default is 1500.0
   -a APERIODICITY, --aperiodicity APERIODICITY
-                        Aperiodicity offset. No change in 0.0. The value above 1 will make the sound unvoiced, and setting
-                        the value below -1 will make it voiced. default is 0.0
+                        Aperiodicity offset. No change in 0.0. The value above 1 will make the sound unvoiced, and setting the value below -1 will
+                        make it voiced. default is 0.0
   -t D4C_THRESHOLD, --d4c_threshold D4C_THRESHOLD
-                        Threshold for D4C aperiodicity-based voiced/unvoiced decision. If the value is 0, all sounds will
-                        be considered voiced, and if the value is 1, all sounds will be considered unvoiced. default is
-                        0.85
+                        Threshold for D4C aperiodicity-based voiced/unvoiced decision. If the value is 0, all sounds will be considered voiced, and
+                        if the value is 1, all sounds will be considered unvoiced. default is 0.85
   -w FFT_SIZE, --fft_size FFT_SIZE
-                        FFT window size. The value must be a power of 2. 2048 for high speed. Higher values improve
-                        quality, but slow processing. default is 16384
+                        FFT window size. The value must be a power of 2. 2048 for high speed. Higher values improve quality, but slow processing.
+                        default is 16384
   -P FRAME_PERIOD, --frame_period FRAME_PERIOD
-                        Processing frame period time. The value is in milliseconds. lower the value, the more accurate the
-                        time becomes, but processing will be much slower. default is 5.0
-  -d, --use_dio         Use dio F0 extraction algorithm instead of Harvest. Slightly faster speed, but less accurate with
-                        noisy audio. default is False
+                        Processing frame period time. The value is in milliseconds. lower the value, the more accurate the time becomes, but
+                        processing will be much slower. default is 5.0
+  -d, --use_dio         Use dio F0 extraction algorithm instead of Harvest. Slightly faster speed, but less accurate with noisy audio. default is
+                        False
 ```
 
 日本語版
 ```
-usage: . [-h] -i INPUT -o OUTPUT [-p F0] [-f FORMANT] [-s SPEED] [-v MAIN_VOLUME] [-l MIN_F0] [-H MAX_F0]
+usage: . [-h] -i INPUT -o OUTPUT [-p F0] [-f FORMANT] [-c FORMANT_POW] [-F FIX_F0] [-s SPEED] [-v MAIN_VOLUME] [-l MIN_F0] [-H MAX_F0]
          [-a APERIODICITY] [-t D4C_THRESHOLD] [-w FFT_SIZE] [-P FRAME_PERIOD] [-d]
 
 options:
@@ -198,7 +200,11 @@ options:
                         出力のWAVファイルのパス。 音声ファイルはモノラルでなければなりません。 必須。
   -p F0, --f0 F0        F0 周波数乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。この値を増やすとピッチが高くなります。 デフォルトは1.0です
   -f FORMANT, --formant FORMANT
-                        フォルマント周波数乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。この値を大きくすると、フォルマントのピッチが低くなります。 デフォルトは1.0です
+                        フォルマント周波数乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。この値を大きくすると、フォルマントのピッチが高くなります。 デフォルトは1.0です
+  -c FORMANT_POW, --formant_pow FORMANT_POW
+                        フォルマント周波数パワー曲線の逆数。 1.0で変化なし。 値は 0 より大きくなければなりません。この値を大きくすると、フォルマントのピッチが高くなります。 デフォルトは1.0です
+  -F FIX_F0, --fix_f0 FIX_F0
+                        固定F0周波数。 0以外の場合有効。デフォルトは0.0
   -s SPEED, --speed SPEED
                         速度変更乗数。 1.0で変化なし。 値は 0 より大きくなければなりません。値を増やすと遅くなり、減らすと速くなります。 デフォルトは1.0です
   -v MAIN_VOLUME, --main_volume MAIN_VOLUME
